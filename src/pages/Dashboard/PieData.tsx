@@ -1,25 +1,13 @@
 import { DragHandle } from "@mui/icons-material"
 import { Button, Card, Tooltip } from "@mui/material"
 import { FC } from "react"
-import { Cell, Legend, Pie, PieChart, PieProps, ResponsiveContainer } from "recharts"
-import { COLORS, RADIAN } from "../../helpers/contants"
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts"
+import { COLORS } from "../../helpers/contants"
 import { InsightAnalysis } from "../../services"
 
 interface Props {
   data: InsightAnalysis | undefined
   className?: string
-}
-
-const renderCustomizedLabel: PieProps["label"] = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * -5
-  const x = cx + radius * Math.cos(-midAngle * RADIAN)
-  const y = cy + radius * Math.sin(-midAngle * RADIAN)
-
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? "start" : "end"} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  )
 }
 
 export const PieData: FC<Props> = (props) => {
