@@ -49,7 +49,7 @@ export const Header: FC<HeaderProps> = () => {
   const user = useAppSelector((state) => state.auth.user)
 
   return (
-    <Box component="header" className="flex-grid justify-between items-center py-2 px-4 ">
+    <Box component="header" className="flex flex-wrap justify-between items-center py-2 px-4 ">
       <Card className="flex items-center p-2 rounded-3xl space-x-2 pr-4">
         <img src="assets/images/eth.svg" alt="logo" />
         <div>Trustable bridge</div>

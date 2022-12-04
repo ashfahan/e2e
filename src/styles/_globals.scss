@@ -22,10 +22,6 @@ table {
   width: 100%;
 }
 
-.container {
-  @apply max-w-screen-2xl mx-auto;
-}
-
 h1,
 h2,
 h3,
@@ -37,15 +33,4 @@ h6 {
 
 a {
   @apply inline-block text-primary;
-}
-
-.hoverable {
-  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out !important;
-  @apply hover:border-transparent hover:shadow-md;
-}
-
-.rc-table-cell.rc-table-cell-ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }

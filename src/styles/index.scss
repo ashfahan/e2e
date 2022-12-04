@@ -7,7 +7,6 @@
 // Custom Compoent
 @tailwind components;
 @import "./scrollbar";
-@import "./flex-grid";
 
 // overrides and globals should be after themes.
 @import "./overrides";
@@ -15,19 +14,6 @@
 
 // utils and helpers should be after everything
 @tailwind utilities;
-
-.animate-sidebar {
-  @apply group-open:opacity-0 opacity-100 transition-[opacity] whitespace-nowrap group-open:pointer-events-none will-change-transform transform-gpu;
-}
-
-[class*="fa-"] {
-  aspect-ratio: 1/1;
-  font-size: 1.1rem;
-  width: 21px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .MuiDataGrid-columnHeaders ~ div {
   height: auto !important;
