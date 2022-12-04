@@ -1,0 +1,21 @@
+.flex-grid {
+  @apply flex flex-wrap;
+
+  &.no-space .column {
+    &:first-child {
+      @apply pl-0;
+    }
+
+    &:last-child {
+      @apply pr-0;
+    }
+  }
+}
+
+.column {
+  flex: 1 1 0%;
+
+  &[class*=" w-"] {
+    @apply flex-none;
+  }
+}
