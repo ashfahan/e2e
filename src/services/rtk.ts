@@ -8,4 +8,5 @@ export const rtkApi = createApi({
   endpoints: (builder) => ({}),
 })
 
+// eslint-disable-next-line no-empty-pattern
 export const {} = rtkApi
