@@ -45,7 +45,7 @@ export const Login: FC<LoginProps> = (props) => {
                 required: { message: "Value is Required", value: true },
               }}
             >
-              <TextField autoComplete="email" fullWidth placeholder="test@example.com / Test" />
+              <TextField autoComplete="email" fullWidth placeholder="Please Type here" />
             </FormField>
 
             <FormField
@@ -53,7 +53,7 @@ export const Login: FC<LoginProps> = (props) => {
               label="Password"
               control={form.control}
               rules={{
-                required: { value: true, message: "Field is required" },
+                required: { value: true, message: "Value is Required" },
                 minLength: { value: 8, message: "Password should be greater then 8" },
               }}
             >
