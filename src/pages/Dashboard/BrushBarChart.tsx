@@ -1,4 +1,4 @@
-import { DragHandle } from "@mui/icons-material"
+import { DragIndicator } from "@mui/icons-material"
 import { Button, Card, colors, Tooltip } from "@mui/material"
 import { FC, useState } from "react"
 import {
@@ -37,7 +37,7 @@ export const BrushBarChart: FC<Props> = (props) => {
           <h3 className="h5 card-title m-0">Current Year Income/Expense/Saving</h3>
           <Tooltip title="Drag me" placement="top">
             <Button className="dragHandle">
-              <DragHandle />
+              <DragIndicator />
             </Button>
           </Tooltip>
         </div>

@@ -1,4 +1,4 @@
-import { DragHandle } from "@mui/icons-material"
+import { DragIndicator } from "@mui/icons-material"
 import { Button, Card, SxProps, Theme, Tooltip } from "@mui/material"
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid"
 import { FC } from "react"
@@ -53,7 +53,7 @@ export const Transations: FC<Props> = (props) => {
           <h3 className="h5 card-title m-0">Transactions History</h3>
           <Tooltip title="Drag me" placement="top">
             <Button className="dragHandle">
-              <DragHandle />
+              <DragIndicator />
             </Button>
           </Tooltip>
         </div>

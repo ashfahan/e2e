@@ -1,4 +1,4 @@
-import { DragHandle } from "@mui/icons-material"
+import { DragIndicator } from "@mui/icons-material"
 import { Button, Card, Tooltip } from "@mui/material"
 import { FC, useState } from "react"
 import { Legend, Pie, PieChart, PieProps, ResponsiveContainer, Sector } from "recharts"
@@ -82,7 +82,7 @@ export const ActiveShapePieChart: FC<Props> = (props) => {
           <h3 className="h5 card-title m-0">Income Category Groups</h3>
           <Tooltip title="Drag me" placement="top">
             <Button className="dragHandle">
-              <DragHandle />
+              <DragIndicator />
             </Button>
           </Tooltip>
         </div>
