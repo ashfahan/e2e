@@ -2,11 +2,14 @@ import { Button, Card, FormControlLabel, IconButton, MenuItem, Select, Switch, T
 import { getCountryListMap } from "country-flags-dial-code"
 import { FC, useState } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { Link } from "react-router-dom"
 import { FormField } from "../../components/FormField"
+import { lang } from "../../helpers/contants"
 import { Header } from "../../layouts/Header"
 import { URL_LOGIN } from "../../router/routes"
-import { SignupDto } from "../../services"
+import { SignupDto, useSignupMutation } from "../../services"
+import { Response } from "../../types/types"
 import { SignupProps } from "./Signup.interface"
 
 export const Signup: FC<SignupProps> = (props) => {
@@ -38,9 +41,14 @@ export const Signup: FC<SignupProps> = (props) => {
       vat: "",
     },
   })
+  const [signup] = useSignupMutation()
 
   const onSubmit = (value: SignupDto) => {
-    console.log(value)
+    toast.promise(signup(value).unwrap(), {
+      error: (e: Response) => e.message ?? lang.error,
+      loading: lang.loading,
+      success: (e: Response) => "Signup Successful",
+    })
   }
 
   return (
