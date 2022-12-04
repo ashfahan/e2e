@@ -1,4 +1,5 @@
-import { setToken, setUser } from "../../redux/slice"
+import { setCookie } from "react-use-cookie"
+import { setUser } from "../../redux/slice"
 import { Response } from "../../types/types"
 import { rtkApi } from "../rtk"
 import { LoginDto, SignupDto, User } from "./identity.interfaces"
@@ -14,8 +15,8 @@ export const identityApi = rtkApi.injectEndpoints({
       invalidatesTags: [{ type: "user" }],
       onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled.then((response) => {
+          setCookie("token", response.data.token, {})
           dispatch(setUser(response.data.user))
-          dispatch(setToken(response.data.token))
         })
       },
     }),

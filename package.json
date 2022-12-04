@@ -22,6 +22,7 @@
     "react-router-dom": "~6.3.0",
     "react-scripts": "5.0.1",
     "react-sortablejs": "^6.1.4",
+    "react-use-cookie": "^1.4.0",
     "recharts": "^2.1.16",
     "redux-persist": "^6.0.0",
     "sortablejs": "^1.15.0",

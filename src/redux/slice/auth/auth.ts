@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { User } from "../../../services/identity"
+import { setCookie } from "react-use-cookie"
 
+import { User } from "../../../services"
 import { AuthStore } from "./Auth.interface"
 
 const initialState: AuthStore = {
-  accessToken: undefined,
   user: undefined,
 }
 
@@ -12,19 +12,18 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    reset: (state) => {
+    reset: () => {
       localStorage.clear()
       sessionStorage.clear()
+      setCookie("token", "")
       return initialState
     },
-    setToken: (state, { payload }: PayloadAction<string>): AuthStore => {
-      return { ...state, accessToken: payload }
-    },
+
     setUser: (state, { payload }: PayloadAction<User>): AuthStore => {
       return { ...state, user: payload }
     },
   },
 })
 
-export const { reset, setToken, setUser } = authSlice.actions
+export const { reset, setUser } = authSlice.actions
 export default authSlice.reducer

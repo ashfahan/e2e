@@ -1,5 +1,6 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query"
 import { Axios, AxiosError, AxiosRequestConfig, AxiosResponse, Method } from "axios"
+import { getCookie, setCookie } from "react-use-cookie"
 
 import { store } from "../redux"
 import { reset } from "../redux/slice"
@@ -11,7 +12,7 @@ export const axiosClient = new Axios({
 })
 
 axiosClient.interceptors.request.use((request) => {
-  const token = store.getState().auth.accessToken
+  const token = getCookie("token")
 
   if (token) request.headers = { ...request.headers, "security-Token": token }
 
@@ -33,7 +34,10 @@ axiosClient.interceptors.response.use((response: AxiosResponse<Response>) => {
 })
 
 axiosClient.interceptors.response.use(undefined, (error: AxiosError<Response>) => {
-  if (Number(error.status) === 401) store.dispatch(reset())
+  if (Number(error.status) === 401) {
+    store.dispatch(reset())
+    setCookie("token", "")
+  }
 
   throw error
 })

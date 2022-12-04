@@ -11,9 +11,10 @@ import { LayoutProps } from "./Layout.interfaces"
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { pathname } = useLocation()
-  const token = useAppSelector((store) => store.auth.accessToken)
+  const user = useAppSelector((store) => store.auth.user)
   const theme = useAppSelector((store) => store.userSettings.theme)
-  const isAuthenticated = !!token
+
+  const isAuthenticated = !!user
   const ThemeSelected = useMemo(() => getTheme(theme), [theme])
 
   const fullPage = [URL_LOGIN, URL_SIGNUP].includes(pathname)
