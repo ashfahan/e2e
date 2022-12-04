@@ -31,7 +31,7 @@ export const OPEN_ROUTES: Route[] = [
 export const AUTHENTICATED_ROUTES: Route[] = [
   {
     path: URL_DASHBOARD,
-    element: <Dashboard className="flex-grow p-10" />,
+    element: <Dashboard className="flex-grow md:p-10 p-5" />,
   },
 ]
 
