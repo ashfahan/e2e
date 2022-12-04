@@ -11,8 +11,7 @@ interface Props {
 
 const DataGridStyle: SxProps<Theme> = {
   border: "0 !important",
-  ".MuiDataGrid-toolbarContainer": { justifyContent: "end" },
-  ".MuiDataGrid-toolbarContainer > div:last-child": { display: "none" },
+  ".MuiDataGrid-toolbarContainer": { flexDirection: "row-reverse" },
 }
 
 export const Transations: FC<Props> = (props) => {
@@ -22,11 +21,12 @@ export const Transations: FC<Props> = (props) => {
     { flex: 1, field: "id", headerName: "Id" },
     {
       flex: 1,
-      field: "",
-      headerName: "type",
+      field: "asd",
+      headerName: "Type",
+      sortable: false,
       renderCell: ({ row }) => (row.amount >= 0 ? "income" : "expense"),
     },
-    { flex: 1, field: "transactionId", headerName: "transactionId" },
+    { flex: 1, field: "transactionId", headerName: "Transaction Id" },
     {
       flex: 1,
       field: "createDate",
@@ -34,9 +34,9 @@ export const Transations: FC<Props> = (props) => {
       renderCell: ({ value }) => new Date(value).toLocaleDateString(),
     },
     { flex: 1, field: "amount", headerName: "Amount" },
-    { flex: 1, field: "dispensableAmount", headerName: "dispensableAmount" },
-    { flex: 1, field: "notes", headerName: "Notes" },
-    { flex: 1, field: "description", headerName: "Description" },
+    { flex: 1, field: "dispensableAmount", headerName: "Dispensable Amount" },
+    { flex: 1, field: "notes", headerName: "Notes", sortable: false },
+    { flex: 1, field: "description", headerName: "Description", sortable: false },
   ]
 
   const rows = [
@@ -68,6 +68,12 @@ export const Transations: FC<Props> = (props) => {
           autoHeight
           components={{
             Toolbar: GridToolbar,
+          }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
           }}
           initialState={{
             pagination: { pageSize: 5 },
