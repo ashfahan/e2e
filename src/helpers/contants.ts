@@ -1,3 +1,5 @@
+import { Color, colors } from "@mui/material"
+
 export const lang = {
   loading: "Processing",
   error: "Some Error Occured",
@@ -5,3 +7,5 @@ export const lang = {
 }
 
 export const RADIAN = Math.PI / 180
+
+export const COLORS = Object.entries(colors).map(([key, value]: [string, Color | any]) => value[500])

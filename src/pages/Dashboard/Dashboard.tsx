@@ -23,17 +23,10 @@ export const Dashboard: FC<DashboardProps> = (props) => {
   const [grid, setGrid] = useState([
     { id: 1, width: "lg:w-4/12 md:w-6/12 w-full", title: "MixBarChart" },
     { id: 2, width: "lg:w-4/12 md:w-6/12 w-full", title: "BrushBarChart" },
-    { id: 3, width: "lg:w-4/12 sm:w-6/12 w-full", title: "ActiveShapePieChart" },
-    { id: 4, width: "lg:w-8/12 w-full order-last lg:order-none", title: "Transations" },
     { id: 5, width: "lg:w-4/12 sm:w-6/12 w-full", title: "PieChart" },
+    { id: 4, width: "lg:w-8/12 w-full order-last lg:order-none", title: "Transations" },
+    { id: 3, width: "lg:w-4/12 sm:w-6/12 w-full", title: "ActiveShapePieChart" },
   ])
-
-  // useEffect(() => {
-  //   if (analytics.data) {
-  //     const data= analytics.data.insightAnalyses[0]
-  //     setRange({ from:  data.})
-  //   }
-  // }, [analytics.data])
 
   if (analytics.isLoading) return <Loader />
   if (analytics.isError || !analytics.data) return <ErrorView />
@@ -52,7 +45,6 @@ export const Dashboard: FC<DashboardProps> = (props) => {
         filter=".ignoreDrag"
         preventOnFilter={true}
         className="flex flex-wrap -mx-3"
-        // onEnd={({ oldIndex, newIndex }) => onDragDropEnds(oldIndex, newIndex)}
       >
         {grid.map(({ title, id, width }) => (
           <>

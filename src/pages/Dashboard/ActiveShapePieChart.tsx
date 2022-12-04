@@ -1,7 +1,7 @@
 import { DragHandle } from "@mui/icons-material"
-import { Button, Card } from "@mui/material"
+import { Button, Card, Tooltip } from "@mui/material"
 import { FC, useState } from "react"
-import { Pie, PieChart, PieProps, ResponsiveContainer, Sector } from "recharts"
+import { Legend, Pie, PieChart, PieProps, ResponsiveContainer, Sector } from "recharts"
 import { RADIAN } from "../../helpers/contants"
 import { InsightAnalysis } from "../../services"
 
@@ -11,7 +11,19 @@ interface Props {
 }
 
 const renderActiveShape: PieProps["activeShape"] = (props) => {
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props
+  const {
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fill,
+    payload: { name },
+    percent,
+    value,
+  } = props
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
   const sx = cx + (outerRadius + 10) * cos
@@ -19,13 +31,12 @@ const renderActiveShape: PieProps["activeShape"] = (props) => {
   const mx = cx + (outerRadius + 30) * cos
   const my = cy + (outerRadius + 30) * sin
   const ex = mx + (cos >= 0 ? 1 : -1) * 22
-  const ey = my
   const textAnchor = cos >= 0 ? "start" : "end"
 
   return (
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
+        {name}
       </text>
       <Sector
         cx={cx}
@@ -45,13 +56,16 @@ const renderActiveShape: PieProps["activeShape"] = (props) => {
         outerRadius={outerRadius + 10}
         fill={fill}
       />
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{` ${Math.round(
-        value
-      )}`}</text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+      <path d={`M${sx},${sy}L${mx},${my}L${ex},${my}`} stroke={fill} fill="none" />
+      <circle cx={ex} cy={my} r={2} fill={fill} stroke="none" />
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={my} dy={-18} textAnchor={textAnchor} fill="#999">
+        {name}
+      </text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={my} textAnchor={textAnchor} fill="#333">
+        {Math.round(value)}
+      </text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={my} dy={18} textAnchor={textAnchor} fill="#999">
+        {`${(percent * 100).toFixed(2)}%`}
       </text>
     </g>
   )
@@ -65,19 +79,21 @@ export const ActiveShapePieChart: FC<Props> = (props) => {
     <div className={className}>
       <Card className="p-5">
         <div className="flex flex-wrap justify-between items-center mb-5">
-          <h3 className="h5 card-title m-0">Analysis Current Year</h3>
-          <Button className="dragHandle">
-            <DragHandle />
-          </Button>
+          <h3 className="h5 card-title m-0">Income Category Groups</h3>
+          <Tooltip title="Drag me" placement="top">
+            <Button className="dragHandle">
+              <DragHandle />
+            </Button>
+          </Tooltip>
         </div>
 
         <div className="flex">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 activeIndex={active}
                 activeShape={renderActiveShape}
-                data={data?.categorization.incomeCategoryGroups}
+                data={data?.categorization.expenseCategoryGroups}
                 cx="50%"
                 cy="50%"
                 startAngle={90}
@@ -89,6 +105,7 @@ export const ActiveShapePieChart: FC<Props> = (props) => {
                 dataKey="sumAmount"
                 onMouseEnter={(_, index) => setActive(index)}
               />
+              <Legend wrapperStyle={{ fontSize: "10px", paddingTop: "1em" }} />
             </PieChart>
           </ResponsiveContainer>
         </div>

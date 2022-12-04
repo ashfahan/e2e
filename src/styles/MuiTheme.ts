@@ -2,7 +2,7 @@ import { createTheme, ThemeOptions as MuiThemeOptions } from "@mui/material"
 import merge from "deepmerge"
 import { CSSProperties } from "react"
 import { DefaultColors } from "tailwindcss/types/generated/colors"
-const colors = require("tailwindcss/colors") as DefaultColors
+export const colors = require("tailwindcss/colors") as DefaultColors
 
 export interface ThemeOptions extends MuiThemeOptions {
   components?: MuiThemeOptions["components"] & {
@@ -123,8 +123,6 @@ const LIGHT: ThemeOptions = {
           border: "1px solid",
           borderRadius: "4px",
 
-          // "&.MuiInputBase-sizeSmall": { height: "27.125px" },
-          // "&:not(.MuiInputBase-sizeSmall)": { height: "2.8375em" },
           "&.Mui-focused:after": { opacity: 1 },
           "& fieldset": { border: 0 },
         },
@@ -144,6 +142,7 @@ const LIGHT: ThemeOptions = {
         },
       },
     },
+
   },
 }
 

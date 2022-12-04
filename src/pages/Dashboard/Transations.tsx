@@ -1,5 +1,5 @@
 import { DragHandle } from "@mui/icons-material"
-import { Button, Card } from "@mui/material"
+import { Button, Card, SxProps, Theme, Tooltip } from "@mui/material"
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid"
 import { FC } from "react"
 import { InsightAnalysis, MonthlyTransaction } from "../../services"
@@ -9,11 +9,23 @@ interface Props {
   className?: string
 }
 
+const DataGridStyle: SxProps<Theme> = {
+  border: "0 !important",
+  ".MuiDataGrid-toolbarContainer": { justifyContent: "end" },
+  ".MuiDataGrid-toolbarContainer > div:last-child": { display: "none" },
+}
+
 export const Transations: FC<Props> = (props) => {
   const { data, className } = props
 
   const columns: GridColDef<MonthlyTransaction & { id: number }>[] = [
-    { flex: 1, field: "id", headerName: "ID" },
+    { flex: 1, field: "id", headerName: "Id" },
+    {
+      flex: 1,
+      field: "",
+      headerName: "type",
+      renderCell: ({ row }) => (row.amount >= 0 ? "income" : "expense"),
+    },
     { flex: 1, field: "transactionId", headerName: "transactionId" },
     {
       flex: 1,
@@ -38,15 +50,18 @@ export const Transations: FC<Props> = (props) => {
     <div className={className}>
       <Card>
         <div className="flex flex-wrap justify-between items-center mb-5">
-          <h3 className="h5 card-title m-0">Analysis Current Year</h3>
-          <Button className="dragHandle">
-            <DragHandle />
-          </Button>
+          <h3 className="h5 card-title m-0">Transactions History</h3>
+          <Tooltip title="Drag me" placement="top">
+            <Button className="dragHandle">
+              <DragHandle />
+            </Button>
+          </Tooltip>
         </div>
 
         <DataGrid<MonthlyTransaction & { id: number }>
           className="h-full"
           rows={rows}
+          sx={DataGridStyle}
           getRowId={(row) => row.transactionId ?? row.id}
           columns={columns}
           rowsPerPageOptions={[5, 10, 20, 50, 100]}
