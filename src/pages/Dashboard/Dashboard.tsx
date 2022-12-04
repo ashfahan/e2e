@@ -46,11 +46,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
 
       <ReactSortable
         list={grid}
-        setList={(newgrid) => {
-          console.log(newgrid)
-
-          setGrid(newgrid)
-        }}
+        setList={(newgrid) => setGrid(newgrid)}
         ghostClass="dropArea"
         handle=".dragHandle"
         filter=".ignoreDrag"
