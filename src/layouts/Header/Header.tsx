@@ -17,7 +17,7 @@ const UserPill = () => {
   return (
     <Dropdown
       anchorEl={
-        <Card className="flex items-center p-2 rounded-3xl space-x-4 cursor-pointer">
+        <Card className="flex items-center p-2 rounded-3xl space-x-4 cursor-pointer pr-5">
           <Avatar alt="ProfilePicture" src={user?.picture} className="w-6 h-6 p-0 text-xs">
             {user?.firstName[0]}
             {user?.lastName[0]}
@@ -29,10 +29,18 @@ const UserPill = () => {
           </div>
         </Card>
       }
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      disablePortal
+      classes={{ paper: "shadow mt-1" }}
     >
-      <MenuItem className="w-full" onClick={() => dispatch(reset())}>
-        Logout
-      </MenuItem>
+      <MenuItem onClick={() => dispatch(reset())}>Logout</MenuItem>
     </Dropdown>
   )
 }
