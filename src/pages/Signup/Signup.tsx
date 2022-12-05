@@ -53,8 +53,8 @@ export const Signup: FC<SignupProps> = (props) => {
 
   return (
     <div className={`flex flex-wrap h-full shadow-none ${className}`}>
-      <div className="w-6/12 bg-loginsplash bg-center bg-cover" />
-      <form className="w-6/12 flex flex-col justify-between" onSubmit={form.handleSubmit(onSubmit)}>
+      <div className="flex-1 bg-loginsplash bg-center bg-cover" />
+      <form className="hidden md:flex flex-1 flex-col justify-between" onSubmit={form.handleSubmit(onSubmit)}>
         <Header />
         <Card className="max-w-screen-sm mx-auto w-11/12">
           <h2 className="text-3xl">Signup</h2>

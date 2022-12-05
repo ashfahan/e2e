@@ -32,7 +32,7 @@ export const Login: FC<LoginProps> = (props) => {
 
   return (
     <div className={`flex flex-wrap h-full shadow-none ${className}`}>
-      <form className="w-6/12 flex flex-col justify-between" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex-1 flex flex-col justify-between" onSubmit={form.handleSubmit(onSubmit)}>
         <Header />
         <Card className="max-w-screen-sm mx-auto w-11/12">
           <h2 className="text-3xl">Login</h2>
@@ -90,7 +90,7 @@ export const Login: FC<LoginProps> = (props) => {
         </Card>
         <div>&nbsp;</div>
       </form>
-      <div className="w-6/12 bg-loginsplash bg-center bg-cover" />
+      <div className="hidden md:block flex-1 bg-loginsplash bg-center bg-cover" />
     </div>
   )
 }

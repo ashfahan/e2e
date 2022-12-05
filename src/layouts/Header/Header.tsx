@@ -56,11 +56,6 @@ export const Header: FC<HeaderProps> = () => {
       </Card>
       <div className="flex items-center space-x-2">
         {user && <UserPill />}
-        <div>
-          <Link to={URL_DASHBOARD} className="md:hidden font-bold text-lg">
-            <img src="/logo.svg" alt="logo" className="h-auto w-full max-h-6" />
-          </Link>
-        </div>
         <ThemeChanger />
       </div>
     </Box>
