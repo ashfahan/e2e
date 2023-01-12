@@ -1,7 +1,11 @@
-import { Avatar, Box, Card, MenuItem } from "@mui/material"
-import { FC } from "react"
+import DehazeIcon from "@mui/icons-material/Dehaze"
+import HomeIcon from "@mui/icons-material/Home"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import LoginIcon from "@mui/icons-material/Login"
+import PersonIcon from "@mui/icons-material/Person"
+import { Avatar, Box, Button, Card, IconButton, Menu, MenuItem } from "@mui/material"
+import { FC, useState } from "react"
 import { Dropdown } from "../../components/Dropdown"
-import { ThemeChanger } from "../../components/ThemeChanger"
 import { reset } from "../../redux/slice"
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks"
 
@@ -46,15 +50,57 @@ const UserPill = () => {
 export const Header: FC<HeaderProps> = () => {
   const user = useAppSelector((state) => state.auth.user)
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
-    <Box component="header" className="flex flex-wrap justify-between items-center py-2 px-4 ">
-      <Card className="flex items-center p-2 rounded-3xl space-x-2 pr-4">
-        <img src="assets/images/eth.svg" alt="logo" />
-        <div>E2E </div>
-      </Card>
+    <Box component="header" className="flex flex-wrap justify-between items-center py-2 px-4 bg-gray-900">
+      <div className="flex items-center">
+        <IconButton className="text-white">
+          <DehazeIcon fontSize="large" />
+        </IconButton>
+        <div className="text-2xl text-orange-400 text">TRUSTABLE</div>
+        <div className="text-2xl text-green-800 pl-2">BRIDGE</div>
+      </div>
       <div className="flex items-center space-x-2">
-        {user && <UserPill />}
-        <ThemeChanger />
+        <Button
+          variant="outlined"
+          aria-controls={open ? "fade-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}
+        >
+          Ashfahan
+        </Button>
+        <Menu
+          id="fade-menu"
+          MenuListProps={{
+            "aria-labelledby": "fade-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>
+            <HomeIcon className="mr-5" />
+            Home
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <PersonIcon className="mr-5" />
+            Profile
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <LoginIcon className="mr-5" />
+            Logout
+          </MenuItem>
+        </Menu>
       </div>
     </Box>
   )

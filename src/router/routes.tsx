@@ -2,8 +2,6 @@ import { RouteObject } from "react-router-dom"
 
 import { NotFound } from "../containers/NotFound"
 import { Dashboard } from "../pages/Dashboard"
-import { Login } from "../pages/Login"
-import { Signup } from "../pages/Signup"
 
 export interface RoutePram extends Record<string, string | undefined> {}
 
@@ -37,11 +35,15 @@ export const AUTHENTICATED_ROUTES: Route[] = [
 
 export const UNAUTHENTICATED_ROUTES: Route[] = [
   {
-    path: URL_LOGIN,
-    element: <Login className="flex-grow p-0" />,
+    path: URL_DASHBOARD,
+    element: <Dashboard className="flex-grow md:p-10 p-5" />,
   },
-  {
-    path: URL_SIGNUP,
-    element: <Signup className="flex-grow p-0" />,
-  },
+  // {
+  //   path: URL_LOGIN,
+  //   element: <Login className="flex-grow p-0" />,
+  // },
+  // {
+  //   path: URL_SIGNUP,
+  //   element: <Signup className="flex-grow p-0" />,
+  // },
 ]
